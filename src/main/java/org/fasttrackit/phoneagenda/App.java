@@ -12,9 +12,9 @@ import java.sql.SQLException;
 public class App {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
         CreateAgendaContactRequest request = new CreateAgendaContactRequest();
-        request.setFirstName("MIDASDAD");
-        request.setLastName("MDSDASDASDFas");
-        request.setPhoneNumber("0744903036");
+        request.setFirstName("MIHUT");
+        request.setLastName("DANUT");
+        request.setPhoneNumber("0744912219");
 
 
         AgendaContactRepository agendaContactRepository = new AgendaContactRepository();
@@ -23,7 +23,7 @@ public class App {
 
 //        agendaContactRepository.getAgendaContacts();
 
-//        agendaContactRepository.getAgendaContactsByFirstNameOrLastName("POP", "0");
-            agendaContactRepository.deleteAllAgendaContacts();
+        agendaContactRepository.getAgendaContactsByFirstNameOrLastName("PO");
+//            agendaContactRepository.deleteAllAgendaContacts();
     }
 }

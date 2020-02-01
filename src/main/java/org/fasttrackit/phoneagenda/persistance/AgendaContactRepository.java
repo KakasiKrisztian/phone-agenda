@@ -90,16 +90,19 @@ public class AgendaContactRepository {
         return agendaContacts;
     }
 
-    public List<AgendaContact> getAgendaContactsByFirstNameOrLastName(String firstName, String lastName) throws SQLException, IOException, ClassNotFoundException {
-        String sql = "SELECT id, first_name, last_name, phone_number FROM agenda_contact WHERE first_name=? OR last_name=?";
+    public List<AgendaContact> getAgendaContactsByFirstNameOrLastName(String name) throws SQLException, IOException, ClassNotFoundException {
+        //Method by approximate first or last name, not full match
+
+        String sql =
+                "SELECT id, first_name, last_name, phone_number FROM agenda_contact WHERE first_name LIKE ? OR last_name LIKE ?";
 
         List<AgendaContact> agendaContacts = new ArrayList<>();
 
         try (Connection connection = DatabaseConfiguration.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);){
 
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(1, "%" + name + "%");
+            preparedStatement.setString(2, "%" + name + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
