@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class AgendaContact {
 
     private long id;
-    private String FirstName;
-    private String LastName;
+    private String firstName;
+    private String lastName;
     private String phoneNumber;
 
     public long getId() {
@@ -18,19 +18,19 @@ public class AgendaContact {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public String getPhoneNumber() {
@@ -45,8 +45,8 @@ public class AgendaContact {
     public String toString() {
         return "AgendaContact{" +
                 "id=" + id +
-                ", FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }

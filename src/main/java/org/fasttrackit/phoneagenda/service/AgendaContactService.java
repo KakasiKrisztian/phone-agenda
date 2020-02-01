@@ -3,6 +3,7 @@ package org.fasttrackit.phoneagenda.service;
 import org.fasttrackit.phoneagenda.domain.AgendaContact;
 import org.fasttrackit.phoneagenda.persistance.AgendaContactRepository;
 import org.fasttrackit.phoneagenda.transfer.CreateAgendaContactRequest;
+import org.fasttrackit.phoneagenda.transfer.GetAgendaContactsRequest;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -47,10 +48,10 @@ public class AgendaContactService {
 
     }
 
-    public List<AgendaContact> getAgendaContactsByFirstNameOrLastName(String name) throws SQLException, IOException, ClassNotFoundException {
+    public List<AgendaContact> getAgendaContactsByFirstNameOrLastName(GetAgendaContactsRequest request) throws SQLException, IOException, ClassNotFoundException {
         System.out.println("Retrieving agenda-contacts by first or last name:");
 
-        return agendaContactRepository.getAgendaContactsByFirstNameOrLastName(name);
+        return agendaContactRepository.getAgendaContactsByFirstNameOrLastName(request);
 
     }
 }

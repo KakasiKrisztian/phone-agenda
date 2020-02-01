@@ -2,6 +2,7 @@ package org.fasttrackit.phoneagenda.persistance;
 
 import org.fasttrackit.phoneagenda.domain.AgendaContact;
 import org.fasttrackit.phoneagenda.transfer.CreateAgendaContactRequest;
+import org.fasttrackit.phoneagenda.transfer.GetAgendaContactsRequest;
 
 import java.io.IOException;
 import java.sql.*;
@@ -90,7 +91,7 @@ public class AgendaContactRepository {
         return agendaContacts;
     }
 
-    public List<AgendaContact> getAgendaContactsByFirstNameOrLastName(String name) throws SQLException, IOException, ClassNotFoundException {
+    public List<AgendaContact> getAgendaContactsByFirstNameOrLastName(GetAgendaContactsRequest request) throws SQLException, IOException, ClassNotFoundException {
         //Method by approximate first or last name, not full match
 
         String sql =
@@ -101,8 +102,8 @@ public class AgendaContactRepository {
         try (Connection connection = DatabaseConfiguration.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);){
 
-            preparedStatement.setString(1, "%" + name + "%");
-            preparedStatement.setString(2, "%" + name + "%");
+            preparedStatement.setString(1, "%" + request.getName() + "%");
+            preparedStatement.setString(2, "%" + request.getName() + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){

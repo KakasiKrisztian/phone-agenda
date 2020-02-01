@@ -2,6 +2,7 @@ package org.fasttrackit.phoneagenda;
 
 import org.fasttrackit.phoneagenda.persistance.AgendaContactRepository;
 import org.fasttrackit.phoneagenda.transfer.CreateAgendaContactRequest;
+import org.fasttrackit.phoneagenda.web.AgendaContactServlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,7 +24,12 @@ public class App {
 
 //        agendaContactRepository.getAgendaContacts();
 
-        agendaContactRepository.getAgendaContactsByFirstNameOrLastName("PO");
+//        agendaContactRepository.getAgendaContactsByFirstNameOrLastName("PO");
 //            agendaContactRepository.deleteAllAgendaContacts();
+
+
+        AgendaContactServlet agendaContactServlet = new AgendaContactServlet();
+
+//        agendaContactServlet.
     }
 }
