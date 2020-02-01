@@ -12,16 +12,18 @@ import java.sql.SQLException;
 public class App {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
         CreateAgendaContactRequest request = new CreateAgendaContactRequest();
-        request.setFirstName("Marcu");
-        request.setLastName("Mihai");
+        request.setFirstName("MIDASDAD");
+        request.setLastName("MDSDASDASDFas");
         request.setPhoneNumber("0744903036");
 
 
         AgendaContactRepository agendaContactRepository = new AgendaContactRepository();
-        agendaContactRepository.createAgendaContact(request);
+//        agendaContactRepository.createAgendaContact(request);
 //        agendaContactRepository.updateAgendaContact(1, request);
 
-        agendaContactRepository.getAgendaContacts();
+//        agendaContactRepository.getAgendaContacts();
 
+//        agendaContactRepository.getAgendaContactsByFirstNameOrLastName("POP", "0");
+            agendaContactRepository.deleteAllAgendaContacts();
     }
 }

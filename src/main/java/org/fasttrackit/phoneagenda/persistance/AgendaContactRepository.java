@@ -56,6 +56,17 @@ public class AgendaContactRepository {
         }
     }
 
+    public void deleteAllAgendaContacts() throws SQLException, IOException, ClassNotFoundException {
+        String sql = "DELETE FROM agenda_contact";
+
+        try (Connection connection = DatabaseConfiguration.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
+            preparedStatement.executeUpdate();
+
+        }
+    }
+
     public List<AgendaContact> getAgendaContacts() throws SQLException, IOException, ClassNotFoundException {
         String sql = "SELECT id, first_name, last_name, phone_number FROM agenda_contact";
 
@@ -75,6 +86,31 @@ public class AgendaContactRepository {
                 agendaContacts.add(agendaContact);
             }
 
+        }
+        return agendaContacts;
+    }
+
+    public List<AgendaContact> getAgendaContactsByFirstNameOrLastName(String firstName, String lastName) throws SQLException, IOException, ClassNotFoundException {
+        String sql = "SELECT id, first_name, last_name, phone_number FROM agenda_contact WHERE first_name=? OR last_name=?";
+
+        List<AgendaContact> agendaContacts = new ArrayList<>();
+
+        try (Connection connection = DatabaseConfiguration.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);){
+
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                AgendaContact agendaContact = new AgendaContact();
+                agendaContact.setId(resultSet.getLong("id"));
+                agendaContact.setFirstName(resultSet.getString("first_name"));
+                agendaContact.setLastName(resultSet.getString("last_name"));
+                agendaContact.setPhoneNumber(resultSet.getString("phone_number"));
+
+                agendaContacts.add(agendaContact);
+            }
         }
         System.out.println(agendaContacts);
         return agendaContacts;
