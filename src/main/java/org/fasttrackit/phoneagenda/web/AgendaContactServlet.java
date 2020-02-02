@@ -73,28 +73,33 @@ public class AgendaContactServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         GetAgendaContactsRequest request = new GetAgendaContactsRequest();
+        String response;
         try {
             request = objectMapper.readValue(req.getReader(), GetAgendaContactsRequest.class);
         } catch (MismatchedInputException e) {
+            System.out.println("Error on readValue, continuing with get all");
             try {
                 List<AgendaContact> agendaContacts = agendaContactService.getAgendaContacts();
 
-                String response = objectMapper.writeValueAsString(agendaContacts);
+                response = objectMapper.writeValueAsString(agendaContacts);
                 resp.getWriter().print(response);
             } catch (SQLException | ClassNotFoundException f) {
                 resp.sendError(500, "Internal Server Error: " + f.getMessage());
             }
         }
 
+        if (request.getName() != null) {
 
-        try {
-            List<AgendaContact> agendaContactsByFirstNameOrLastName =
-                    agendaContactService.getAgendaContactsByFirstNameOrLastName(request);
 
-            String firstResponse = objectMapper.writeValueAsString(agendaContactsByFirstNameOrLastName);
-            resp.getWriter().print(firstResponse);
-        } catch (SQLException | ClassNotFoundException e) {
-            resp.sendError(500, "Internal Server Error: " + e.getMessage());
+            try {
+                List<AgendaContact> agendaContactsByFirstNameOrLastName =
+                        agendaContactService.getAgendaContactsByFirstNameOrLastName(request);
+
+                String firstResponse = objectMapper.writeValueAsString(agendaContactsByFirstNameOrLastName);
+                resp.getWriter().print(firstResponse);
+            } catch (SQLException | ClassNotFoundException e) {
+                resp.sendError(500, "Internal Server Error: " + e.getMessage());
+            }
         }
 
 
